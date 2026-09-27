@@ -5,6 +5,7 @@ export const products = [
     category: "Fruits & Vegetables",
     name: "Apples",
     price: 25,
+    image: "/img/Shai.jpg",
   },
   {
     id: 2,
