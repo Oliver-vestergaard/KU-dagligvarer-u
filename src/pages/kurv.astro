@@ -187,9 +187,64 @@ import Nav from "../components/Nav.astro";
 
   const sendButton = document.querySelector("#sendOrder");
 
-  sendButton?.addEventListener("click", () => {
-    console.log("CART:", getCart());
-    console.log("USER:", getUserData());
-    console.log("TOTAL:", getTotal());
+  sendButton?.addEventListener("click", async () => {
+    const cart = getCart();
+    const userData = getUserData();
+    const total = getTotal();
+    const remaining = 350 - total;
+
+    const shoppingList = cart
+      .map((product) => {
+        const productTotal = product.price * product.quantity;
+
+        return `${product.name}
+${product.quantity} × ${product.price},00 DKK = ${productTotal},00 DKK`;
+      })
+      .join("\n\n");
+
+    const message = `
+NEW SHOPPING SUBMISSION
+
+SHOPPING LIST
+
+${shoppingList || "No items selected."}
+
+
+TOTAL
+${total} DKK
+
+REMAINING
+${remaining} DKK
+
+
+USER INFORMATION
+
+Age: ${userData.age || "Not answered"}
+Sex: ${userData.sex || "Not answered"}
+Living: ${userData.living || "Not answered"}
+Food restrictions: ${userData.restrictions || "None"}
+  `.trim();
+
+    const formData = new FormData();
+
+    formData.append("access_key", import.meta.env.PUBLIC_WEB3FORMS_KEY);
+
+    formData.append("subject", "New shopping submission");
+    formData.append("from_name", "KU Dagligvarer");
+    formData.append("message", message);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Your order has been sent!");
+    } else {
+      alert("Something went wrong. Please try again.");
+      console.error(result);
+    }
   });
 </script>

@@ -29,7 +29,10 @@ jobs:
 
       - name: Build Astro
         run: npm run build
+  env:
+    PUBLIC_WEB3FORMS_KEY: ${{ secrets.WEB3FORMS_KEY }}
 
+    
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
