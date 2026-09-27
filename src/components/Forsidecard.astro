@@ -1,0 +1,150 @@
+---
+const { product } = Astro.props;
+---
+
+<div class="card">
+  <img class="ProductImg" src="/img/Shai.jpg" alt={product.name} />
+
+  <div class="product-info">
+    <div class="product-text">
+      <p class="ProductName">{product.name}</p>
+      <p class="ProductPrice">{product.price},00 DKK</p>
+    </div>
+
+    <button class="button" data-product={JSON.stringify(product)}> Tilføj til kurv </button>
+  </div>
+</div>
+
+<script>
+  import { addToCart } from "../scripts/cart.js";
+
+  const buttons = document.querySelectorAll(".button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const product = JSON.parse(button.dataset.product);
+
+      addToCart(product);
+    });
+  });
+</script>
+
+<style>
+  .card {
+    display: grid;
+  }
+
+  .ProductImg {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+
+  .product-info {
+    margin-top: 0.5rem;
+  }
+
+  .product-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ProductName,
+  .ProductPrice {
+    margin: 0;
+  }
+
+  .ProductName {
+    font-weight: bold;
+  }
+
+  .ProductPrice {
+    font-size: 1rem;
+  }
+
+  .button {
+    width: 100%;
+    margin-top: 0.5rem;
+    color: var(--background-color);
+    font-size: 0.8rem;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    background: var(--text-color);
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--text-color);
+    text-align: center;
+  }
+
+  .button:hover {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+</style>
+
+<script>
+  import { saveUserData, getUserData } from "../scripts/cart.js";
+
+  const ageInput = document.querySelector("#age");
+  const sexInputs = document.querySelectorAll('input[name="sex"]');
+  const livingInputs = document.querySelectorAll('input[name="living"]');
+  const restrictionsInput = document.querySelector("#restrictions");
+
+  // Hent tidligere gemte svar
+  const savedData = getUserData();
+
+  if (ageInput && savedData.age) {
+    ageInput.value = savedData.age;
+  }
+
+  if (savedData.sex) {
+    const selectedSex = document.querySelector(`input[name="sex"][value="${savedData.sex}"]`);
+
+    if (selectedSex) {
+      selectedSex.checked = true;
+    }
+  }
+
+  if (savedData.living) {
+    const selectedLiving = document.querySelector(`input[name="living"][value="${savedData.living}"]`);
+
+    if (selectedLiving) {
+      selectedLiving.checked = true;
+    }
+  }
+
+  if (restrictionsInput && savedData.restrictions) {
+    restrictionsInput.value = savedData.restrictions;
+  }
+
+  function saveForm() {
+    const selectedSex = document.querySelector('input[name="sex"]:checked');
+
+    const selectedLiving = document.querySelector('input[name="living"]:checked');
+
+    const userData = {
+      age: ageInput?.value || "",
+      sex: selectedSex?.value || "",
+      living: selectedLiving?.value || "",
+      restrictions: restrictionsInput?.value || "",
+    };
+
+    saveUserData(userData);
+  }
+
+  ageInput?.addEventListener("input", saveForm);
+
+  sexInputs.forEach((input) => {
+    input.addEventListener("change", saveForm);
+  });
+
+  livingInputs.forEach((input) => {
+    input.addEventListener("change", saveForm);
+  });
+
+  restrictionsInput?.addEventListener("input", saveForm);
+</script>

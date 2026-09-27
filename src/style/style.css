@@ -1,0 +1,19 @@
+.KategoriHeadline {
+  margin: 0 1rem;
+}
+
+.Info {
+  margin: 0 1rem;
+}
+@media (min-width: 801px) {
+  .KategoriHeadline {
+    margin: 0 4rem;
+  }
+
+  .KategoriGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+}

@@ -1,0 +1,116 @@
+/********* COLORS *********/
+
+body {
+  background-color: var(--background-color);
+}
+
+:root {
+  --background-color: #dcc8a9;
+  --text-color: #110f0f;
+  --Yellow-color: #ddb573;
+  --cta-color: #7fa6a7;
+}
+
+/******** FONTS *********/
+
+h1 {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--text-color);
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+.menu a {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-family: "Arimo", sans-serif;
+
+  font-weight: bold;
+  font-style: normal;
+  color: var(--text-color);
+  font-size: 1.25rem;
+}
+
+button {
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+p,
+ul,
+ol,
+a,
+span {
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+  font-style: normal;
+  font-size: 1.125rem;
+  color: var(--text-color);
+}
+
+p {
+  max-width: 65ch;
+  line-height: 1.6;
+}
+
+li {
+  max-width: 65ch;
+}
+
+.Italic-Text {
+  font-weight: lighter;
+  font-style: italic;
+}
+
+.light-text {
+  font-weight: lighter;
+}
+
+/********** DESKTOP **********/
+@media (min-width: 801px) {
+  /****** FONT ******/
+  h1 {
+    font-size: 3.25rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
+  p,
+  ul,
+  ol,
+  a {
+    font-size: 1.25rem;
+  }
+
+  button {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,195 @@
+---
+import "../style/global.css";
+import "../style/style.css";
+import Nav from "../components/Nav.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Kurv</title>
+
+    <link rel="icon" type="image/x-icon" href="/logo/Logo_interrim.webp" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <main>
+      <Nav />
+      <section class="cart">
+        <h1>Din kurv</h1>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+          <p>I ALT: <span id="cartTotal">0 DKK</span></p>
+          <p>TILBAGE: <span id="cartRemaining">350 DKK</span></p>
+        </div>
+      </section>
+
+      <section class="user-info">
+        <h2>Dine svar</h2>
+
+        <div id="userInfo"></div>
+        <button id="sendOrder">SEND BESTILLING</button>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  .cart {
+    margin: 4rem 4rem 0;
+  }
+
+  .cart h1 {
+    margin-bottom: 2rem;
+  }
+
+  #cartItems {
+    border-top: 5px solid var(--text-color);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--text-color);
+  }
+
+  .cart-item p {
+    margin: 0;
+  }
+
+  .cart-item p:first-child {
+    font-weight: bold;
+  }
+
+  .cart-item p:last-child {
+    text-align: right;
+  }
+
+  .cart-total {
+    margin-top: 2rem;
+    margin-left: auto;
+    max-width: 350px;
+    border-top: 5px solid var(--text-color);
+    padding-top: 1rem;
+  }
+
+  .cart-total p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    font-weight: bold;
+  }
+
+  .user-info {
+    margin: 6rem 4rem;
+    max-width: 800px;
+  }
+
+  .user-info h2 {
+    margin-bottom: 2rem;
+    border-bottom: 5px solid var(--text-color);
+    padding-bottom: 1rem;
+  }
+
+  #userInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+  }
+
+  #userInfo p {
+    margin: 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--text-color);
+  }
+
+  #userInfo strong {
+    font-weight: bold;
+  }
+
+  @media (max-width: 800px) {
+    .cart {
+      margin: 3rem 1rem 0;
+    }
+
+    .user-info {
+      margin: 5rem 1rem;
+    }
+
+    #userInfo {
+      grid-template-columns: 1fr;
+    }
+
+    .cart-item {
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  import { getCart, getTotal, getUserData } from "../scripts/cart.js";
+
+  const cart = getCart();
+  const cartItems = document.querySelector("#cartItems");
+  const cartTotal = document.querySelector("#cartTotal");
+  const cartRemaining = document.querySelector("#cartRemaining");
+
+  cart.forEach((product) => {
+    const item = document.createElement("div");
+
+    item.classList.add("cart-item");
+
+    item.innerHTML = `
+      <p>${product.name}</p>
+      <p>${product.quantity} × ${product.price},00 DKK</p>
+    `;
+
+    cartItems?.appendChild(item);
+  });
+
+  const total = getTotal();
+  const remaining = 350 - total;
+
+  if (cartTotal) {
+    cartTotal.textContent = `${total} DKK`;
+  }
+
+  if (cartRemaining) {
+    cartRemaining.textContent = `${remaining} DKK`;
+  }
+
+  // Hent brugerens formularsvar
+  const userData = getUserData();
+
+  const userInfo = document.querySelector("#userInfo");
+
+  if (userInfo) {
+    userInfo.innerHTML = `
+      <p><strong>Age:</strong> ${userData.age || "Not answered"}</p>
+      <p><strong>Sex:</strong> ${userData.sex || "Not answered"}</p>
+      <p><strong>Living:</strong> ${userData.living || "Not answered"}</p>
+      <p><strong>Food restrictions:</strong> ${userData.restrictions || "None"}</p>
+    `;
+  }
+
+  const sendButton = document.querySelector("#sendOrder");
+
+  sendButton?.addEventListener("click", () => {
+    console.log("CART:", getCart());
+    console.log("USER:", getUserData());
+    console.log("TOTAL:", getTotal());
+  });
+</script>

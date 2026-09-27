@@ -1,0 +1,125 @@
+---
+import Devider from "./Devider.astro";
+---
+
+<div class="sticky-nav">
+  <nav class="nav">
+    <div class="nav_left">
+      <div class="nav_left">
+        <h3>
+          DIT BELØB: <span id="cartMoney">350 DKK</span>
+        </h3>
+
+        <button id="resetCart">NULSTIL</button>
+      </div>
+    </div>
+
+    <div class="nav_right">
+      <h3>VARER I KURVEN</h3>
+
+      <div id="cartCount">
+        <span id="cartNumber">0</span>
+      </div>
+    </div>
+  </nav>
+
+  <Devider />
+</div>
+<style>
+  #resetCart {
+    margin-left: 1rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--text-color);
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  #resetCart:hover {
+    background-color: var(--text-color);
+    color: var(--background-color);
+  }
+
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    background-color: var(--background-color);
+    z-index: 10;
+    padding-top: 1rem;
+  }
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 4rem;
+  }
+
+  .nav_left {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav_right {
+    justify-self: end;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav h3 {
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  #cartCount {
+    background-color: var(--text-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+  }
+
+  #cartNumber {
+    color: var(--background-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  #cartMoney {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  @media (min-width: 801px) {
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 0 4rem;
+    }
+
+    #cartNumber {
+      color: var(--background-color);
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+</style>
+
+<script>
+  import { updateNav, resetCart } from "../scripts/cart.js";
+
+  updateNav();
+
+  const resetButton = document.querySelector("#resetCart");
+
+  resetButton?.addEventListener("click", () => {
+    resetCart();
+  });
+</script>
