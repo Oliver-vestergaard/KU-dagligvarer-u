@@ -187,3 +187,67 @@ const categories = ["Fruits & Vegetables", "Bakery", "Canned & Dry Goods", "Meat
     }
   }
 </style>
+
+<script>
+  import { saveUserData, getUserData } from "../scripts/cart.js";
+
+  const ageInput = document.querySelector("#age");
+  const sexInputs = document.querySelectorAll('input[name="sex"]');
+  const livingInputs = document.querySelectorAll('input[name="living"]');
+  const restrictionsInput = document.querySelector("#restrictions");
+
+  // Hent tidligere gemte svar
+  const savedData = getUserData();
+
+  if (ageInput && savedData.age) {
+    ageInput.value = savedData.age;
+  }
+
+  if (savedData.sex) {
+    const selectedSex = document.querySelector(`input[name="sex"][value="${savedData.sex}"]`);
+
+    if (selectedSex) {
+      selectedSex.checked = true;
+    }
+  }
+
+  if (savedData.living) {
+    const selectedLiving = document.querySelector(`input[name="living"][value="${savedData.living}"]`);
+
+    if (selectedLiving) {
+      selectedLiving.checked = true;
+    }
+  }
+
+  if (restrictionsInput && savedData.restrictions) {
+    restrictionsInput.value = savedData.restrictions;
+  }
+
+  // Gem formularsvar
+  function saveForm() {
+    const selectedSex = document.querySelector('input[name="sex"]:checked');
+
+    const selectedLiving = document.querySelector('input[name="living"]:checked');
+
+    const userData = {
+      age: ageInput?.value || "",
+      sex: selectedSex?.value || "",
+      living: selectedLiving?.value || "",
+      restrictions: restrictionsInput?.value || "",
+    };
+
+    saveUserData(userData);
+  }
+
+  ageInput?.addEventListener("input", saveForm);
+
+  sexInputs.forEach((input) => {
+    input.addEventListener("change", saveForm);
+  });
+
+  livingInputs.forEach((input) => {
+    input.addEventListener("change", saveForm);
+  });
+
+  restrictionsInput?.addEventListener("input", saveForm);
+</script>

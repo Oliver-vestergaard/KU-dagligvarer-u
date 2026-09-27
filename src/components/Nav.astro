@@ -5,13 +5,13 @@ import Devider from "./Devider.astro";
 <div class="sticky-nav">
   <nav class="nav">
     <div class="nav_left">
-      <div class="nav_left">
-        <h3>
-          DIT BELØB: <span id="cartMoney">350 DKK</span>
-        </h3>
+      <h3>
+        DIT BELØB: <span id="cartMoney">350 DKK</span>
+      </h3>
 
-        <button id="resetCart">NULSTIL</button>
-      </div>
+      <button id="resetCart">NULSTIL</button>
+
+      <a id="pageButton" href="/ku-dagligvarer/kurv"> GÅ TIL KURV </a>
     </div>
 
     <div class="nav_right">
@@ -25,8 +25,10 @@ import Devider from "./Devider.astro";
 
   <Devider />
 </div>
+
 <style>
-  #resetCart {
+  #resetCart,
+  #pageButton {
     margin-left: 1rem;
     padding: 0.4rem 0.7rem;
     border: 1px solid var(--text-color);
@@ -34,10 +36,13 @@ import Devider from "./Devider.astro";
     color: var(--text-color);
     font-family: inherit;
     font-size: 0.8rem;
+    font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
   }
 
-  #resetCart:hover {
+  #resetCart:hover,
+  #pageButton:hover {
     background-color: var(--text-color);
     color: var(--background-color);
   }
@@ -49,6 +54,7 @@ import Devider from "./Devider.astro";
     z-index: 10;
     padding-top: 1rem;
   }
+
   .nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -62,7 +68,6 @@ import Devider from "./Devider.astro";
 
   .nav_right {
     justify-self: end;
-
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -122,4 +127,15 @@ import Devider from "./Devider.astro";
   resetButton?.addEventListener("click", () => {
     resetCart();
   });
+
+  const pageButton = document.querySelector("#pageButton");
+
+  if (pageButton) {
+    const currentPath = window.location.pathname;
+
+    if (currentPath.includes("/kurv")) {
+      pageButton.textContent = "TILBAGE TIL VARER";
+      pageButton.setAttribute("href", "/ku-dagligvarer/");
+    }
+  }
 </script>
