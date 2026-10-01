@@ -4,7 +4,7 @@ const { product } = Astro.props;
 
 <div class="card">
   <img class="ProductImg" src={`${import.meta.env.BASE_URL}${product.image}`} alt={product.name} />
-  <p>{import.meta.env.BASE_URL}{product.image}</p>
+
   <div class="product-info">
     <div class="product-text">
       <p class="ProductName">{product.name}</p>

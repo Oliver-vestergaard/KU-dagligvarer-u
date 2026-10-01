@@ -5,6 +5,17 @@
 .Info {
   margin: 0 1rem;
 }
+
+button {
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 2px solid black;
+}
+
 @media (min-width: 801px) {
   .KategoriHeadline {
     margin: 0 4rem;
