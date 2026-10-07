@@ -6,12 +6,12 @@ import Devider from "./Devider.astro";
   <nav class="nav">
     <div class="nav_left">
       <h3>
-        DIT BELØB: <span id="cartMoney">350 DKK</span>
+        DIT BELØB: <span id="cartMoney">300 DKK</span>
       </h3>
 
       <button id="resetCart">NULSTIL</button>
 
-      <a id="pageButton" href="/ku-dagligvarer-u/kurv"> GÅ TIL KURV </a>
+      <a id="pageButton" href={`${import.meta.env.BASE_URL}/kurv`}> GÅ TIL KURV </a>
     </div>
 
     <div class="nav_right">
@@ -190,7 +190,7 @@ import Devider from "./Devider.astro";
 
     if (currentPath.includes("/kurv")) {
       pageButton.textContent = "TILBAGE TIL VARER";
-      pageButton.setAttribute("href", "/ku-dagligvarer-u/");
+      pageButton.setAttribute("href", import.meta.env.BASE_URL);
     }
   }
 </script>
