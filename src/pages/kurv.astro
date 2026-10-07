@@ -30,7 +30,7 @@ import Nav from "../components/Nav.astro";
 
         <div class="cart-total">
           <p>I ALT: <span id="cartTotal">0 DKK</span></p>
-          <p>TILBAGE: <span id="cartRemaining">350 DKK</span></p>
+          <p>TILBAGE: <span id="cartRemaining">300 DKK</span></p>
         </div>
       </section>
 
@@ -161,7 +161,7 @@ import Nav from "../components/Nav.astro";
   });
 
   const total = getTotal();
-  const remaining = 350 - total;
+  const remaining = 300 - total;
 
   if (cartTotal) {
     cartTotal.textContent = `${total} DKK`;
@@ -191,7 +191,7 @@ import Nav from "../components/Nav.astro";
     const cart = getCart();
     const userData = getUserData();
     const total = getTotal();
-    const remaining = 350 - total;
+    const remaining = 300 - total;
 
     const shoppingList = cart
       .map((product) => {

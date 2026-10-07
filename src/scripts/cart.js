@@ -1,4 +1,4 @@
-const START_BUDGET = 350;
+const START_BUDGET = 300;
 const CART_KEY = "cart";
 
 export function getCart() {
