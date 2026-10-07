@@ -1,76 +1,85 @@
 export const products = [
   // FRUITS & VEGETABLES
+
   {
     id: 1,
     category: "Fruits & Vegetables",
     name: "Apples",
-    price: 25,
+    price: 20,
     image: "/img/Apples.webp",
   },
+
   {
     id: 2,
     category: "Fruits & Vegetables",
     name: "Bananas (4 pcs.)",
-    price: 10,
+    price: 8,
     image: "/img/banana.webp",
   },
+
   {
     id: 3,
     category: "Fruits & Vegetables",
     name: "Pears",
-    price: 24,
+    price: 19.2,
     image: "/img/Pears.webp",
   },
+
   {
     id: 4,
     category: "Fruits & Vegetables",
     name: "Grapes",
-    price: 25,
+    price: 20,
     image: "/img/Grapes.webp",
   },
+
   {
     id: 5,
     category: "Fruits & Vegetables",
     name: "Cucumber",
-    price: 10,
+    price: 8,
     image: "/img/Cucumber.webp",
   },
+
   {
     id: 6,
     category: "Fruits & Vegetables",
     name: "Lettuce",
-    price: 12,
+    price: 9.6,
     image: "/img/lettuce.webp",
   },
+
   {
     id: 7,
     category: "Fruits & Vegetables",
     name: "Bell Pepper",
-    price: 22,
+    price: 17.6,
     image: "/img/Bell_Peber.webp",
   },
+
   {
     id: 8,
     category: "Fruits & Vegetables",
     name: "Carrots",
-    price: 15,
+    price: 12,
     image: "/img/Carrots.webp",
   },
+
   {
     id: 9,
     category: "Fruits & Vegetables",
     name: "Broccoli",
-    price: 15,
+    price: 12,
     image: "/img/Brocolli.webp",
   },
+
   {
     id: 10,
     category: "Fruits & Vegetables",
     name: "Tomatoes",
-    price: 20,
+    price: 16,
     image: "/img/Tomatoes.webp",
   },
-
   // BAKERY
   {
     id: 11,
